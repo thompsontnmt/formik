@@ -1,6 +1,9 @@
 import React from 'react'
-import { Formik, Field } from 'formik'
+import { Formik, Field, Form } from 'formik'
 import { Button, TextField } from '@material-ui/core'
+// import { number } from 'yup';
+// import * as Yup from 'yup';
+// import 'yup-phone';
 
 const App = () => {
   return (
@@ -8,6 +11,9 @@ const App = () => {
       <Formik initialValues={{ 
         firstName: '',
         lastName: '',
+        email: '',
+        mobile: '',
+        agreement: false,
       }}
       onSubmit={(data, {setSubmitting}) => {
         setSubmitting(true);
@@ -16,9 +22,9 @@ const App = () => {
         setSubmitting(false)
       }}
       >
-        {({ values, handleChange, handleBlur, handleSubmit}) => (
+        {({ values, isSubmitting }) => (
 
-          <form onSubmit={handleSubmit}>
+          <Form>
             <Field
               placeholder='First Name'
               name="firstName"
@@ -31,13 +37,33 @@ const App = () => {
               name="lastName"
               type='input'
               as={TextField}
-             />
+            />
           </div>
+          <div>
+            <Field
+              placeholder='Email'
+              name="email"
+              type='input'
+              as={TextField}
+            />
+          </div>
+          <div>
+            <Field
+              placeholder='Mobile'
+              name="mobile"
+              type='input'
+              as={TextField}
+            />
+          </div>
+            <Field 
+              name='agreement' 
+              type='checkbox'>
+            </Field>
           <div>
             <Button type='submit'>Submit</Button>
           </div>
           <pre>{JSON.stringify(values, null, 2)}</pre>
-        </form>
+        </Form>
           )}
 
       </Formik>
